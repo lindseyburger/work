@@ -1,0 +1,208 @@
+//
+//  main.c
+//  Arrays1DDemo
+//
+//  Created by Lindsey Burger on 9/17/18.
+//  Lindsey Burger
+//  9/17/2018
+//  Lab #3
+//  Creating a 1 demensional array
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 20
+
+void fillArray(int array1[SIZE]){
+    
+    int low = 0;
+    int high = 0;
+    
+    printf("This function is going to fill an array with random numbers. Please enter a number (integer) to bound the array to a lower number: \n");
+    scanf("%d", &low);
+    printf("Now please select an bigger integer to bound the array to a higher number: \n");
+    scanf("%d", &high);
+    
+    
+    for(int i = 0; (i < SIZE); i++){
+        // we have to find a way to make sure the #'s in the array are bounded
+        //integrate it into the random() generator
+        array1[i] = (rand() % (high + 1 - low)) + low;
+        //how can we get multiple numbers to print on the same line instead of 1 number for 20 lines?
+        //5 lines w/ 4 numbers would be good
+        if(i % 5 == 0 ){
+            printf("\n ");
+        }
+        printf("%d ", array1[i]);
+        
+    }
+    
+  
+
+}
+
+
+void findWithRange(){
+    int array2[SIZE];
+    fillArray(array2);
+    
+    
+    int indexHigh = 0; //these are indices so should be easier to implement
+    int indexLow = 0;
+    printf("\n");
+    printf("\n");
+    
+    printf("This function is going to find the largest number between 2 indices. Please enter a number for the first lower-bounded index. \n");
+    scanf("%d", &indexLow);
+    printf("Please enter a number for the higher-bounded index. \n");
+    scanf("%d", &indexHigh);
+    
+    
+    int max = array2[0];
+    for(int i = indexLow; i <= indexHigh; i++){
+        if(array2[i] > max){
+            max = array2[i];
+        }
+        
+    }
+    printf("The MAX number is: ");
+    printf("%d\n", max );
+    
+    printf("\n");
+    printf("\n");
+    
+ 
+        }
+
+ void reverseArray(){
+     printf("This function is going to take an array, and then reverse it. \n");
+     printf("This is what the array looks like originally: \n");
+   
+     int referenceArray[] = {2,4,7,11,6,1,1,8,9,16,12,43,15,22,18,16,17,2,1,5};
+     for(int i = 0; (i < SIZE); i++){
+         if(i % 5 == 0 ){
+             printf("\n ");
+         }
+         printf("%d ", referenceArray[i]);
+         
+      
+    }
+     printf("\n");
+     printf("\n");
+     printf("This is what the array looks like reversed: \n");
+     
+     int temp = 0;
+     for(int i = 0; i < SIZE/2; ++i){
+         temp = referenceArray[i];
+         referenceArray[i] = referenceArray[SIZE - 1 - i];
+         referenceArray[SIZE - 1 - i ] = temp;
+     }
+     for (int i = 0; i < SIZE ; i++){
+         if(i % 5 == 0){
+             printf("\n");
+         }
+
+     printf("%d ", referenceArray[i]);
+        
+     }
+     printf("\n");
+ }
+
+
+void reverse(){
+    printf("This function take the array, and reverse the number between two indices. \n");
+    int indexHigh = 0; //these are indices so should be easier to implement
+    int indexLow = 0;
+    printf("\n");
+    
+    
+    printf("This is the original array: \n");
+    int referenceArray[] = {2,4,7,11,6,1,1,8,9,16,12,43,15,22,18,16,17,2,1,5};
+    for(int i = 0; (i < SIZE); i++){
+        if(i % 5 == 0 ){
+            printf("\n ");
+        }
+        printf("%d ", referenceArray[i]);
+    }
+    printf("\n");
+    printf("\n");
+    printf("Please enter a number for the first lower-bounded index. \n");
+    scanf("%d", &indexLow);
+    printf("Please enter a number for the higher-bounded index. \n");
+    scanf("%d", &indexHigh);
+    if(indexLow < 0 || indexHigh > 20 || indexLow >= indexHigh){
+        printf("It looks like you've entered something incorrectly...Either you made the lower bound less than 0, the upper bound greater than the integers size, or the lower bound greater than the upper bound...\n");
+        exit(0);
+    }
+    
+    printf("This is what the array looks like reversed between the two indices you chose: \n");
+    
+    
+    int j = indexHigh;
+    int i = indexLow;
+    int temp = 0;
+    while( i < j){
+        temp = referenceArray[i];
+        referenceArray[i] = referenceArray[j];
+        referenceArray[j] = temp;
+        i++;
+        j--;
+        
+    }
+    for(i = 0; i < SIZE; i ++){
+        if(i % 5 == 0 ){
+            printf("\n ");
+        }
+
+        printf("%d ", referenceArray[i]);
+    }
+        
+    
+        printf("\n ");
+    }
+
+
+void findSequence(){
+    int a = 0;
+    int b = 0;
+    printf("This function will take two integers (provided by you) and will check to see if they are next to eachother in the array. \n");
+    printf("Please enter the first number \n");
+    scanf("%d", &a);
+    printf("Please enter the second number \n");
+    scanf("%d", &b);
+    
+    int referenceArray[] = {2,4,7,11,6,1,1,8,9,16,12,43,15,22,18,16,17,2,1,5};
+    for(int i = 0; (i < SIZE); i++){
+        
+        if ((referenceArray[i] == a || referenceArray[i] == b) && (referenceArray[i + 1] == b || referenceArray[i - 1] == b || referenceArray[i+1] == a || referenceArray[i-1] == a)){
+            
+                printf("Sequence found at index ");
+            printf("%d", i);
+            printf("\n");
+            
+            }
+            else{
+                printf("Sequence not found at index ");
+                printf("%d", i);
+                printf("\n");
+                
+            }
+        
+        }
+        
+    }
+
+
+
+
+
+int main(int argc, const char * argv[]) {
+    findWithRange();
+    printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    reverseArray();
+    printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    reverse();
+    printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    findSequence();
+}
