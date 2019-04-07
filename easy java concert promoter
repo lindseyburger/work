@@ -1,0 +1,135 @@
+package concertlab;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author LindseyKBurger
+ */
+public class ConcertPromoter {
+    private String bandName;
+    private int venueCapacity;
+    private int numberOfTicketsSold;
+    private int seatsLeft;
+    
+    private double sales; // money made
+    private double priceByPhone;
+    private double priceAtVenue;
+    
+    private int ticketsByPhone;
+    private int ticketsInPerson;
+    
+    private boolean atVenue = false;
+    
+    
+    
+    public void setTicketsByPhone(int ticketsByPhone){
+        this.ticketsByPhone = ticketsByPhone;
+    }
+    
+    public int getTicketsByPhone(){
+        return ticketsByPhone;
+    }
+    
+    public void setTicketsInPerson(int ticketsInPerson){
+        this.ticketsInPerson = ticketsInPerson;
+    }
+    
+    public int getTicketsInPerson(){
+        return ticketsInPerson;
+    }
+    
+
+    public double getPriceByPhone() {
+        return priceByPhone;
+    }
+
+    public void setPriceByPhone(double priceByPhone) {
+        this.priceByPhone = priceByPhone;
+    }
+
+    public double getPriceAtVenue() {
+        return priceAtVenue;
+    }
+
+    public void setPriceAtVenue(double priceAtVenue) {
+        this.priceAtVenue = priceAtVenue;
+    }
+
+    
+    public String getBandName() {
+        return bandName;
+    }
+
+    public void setBandName(String bandName) {
+        this.bandName = bandName;
+    }
+
+    public int getVenueCapacity() {
+        return venueCapacity;
+    }
+
+    public void setVenueCapacity(int venueCapacity) {
+        this.venueCapacity = venueCapacity;
+    }
+    
+    public void switchSales() {
+        atVenue = !atVenue;
+    }
+
+    public void recordSales(int tickets){
+        
+        numberOfTicketsSold+=tickets;
+        if(atVenue){
+            sales += ticketsInPerson;
+        }else{
+            sales += ticketsByPhone;
+        }
+    }
+    
+    public void totalSales(double sales){
+        this.sales = ((priceByPhone*ticketsByPhone)+(priceAtVenue*ticketsInPerson)); 
+    }
+    
+    
+    
+    public int VenueSeats(int venueCapacity){
+        seatsLeft = venueCapacity - (ticketsByPhone + ticketsInPerson);
+        return seatsLeft;
+    }
+    
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        
+        ConcertPromoter concert1 = new ConcertPromoter();
+        concert1.setBandName("Muse");
+        concert1.setPriceAtVenue(100);
+        concert1.setPriceByPhone(75);
+        concert1.setVenueCapacity(60000);
+        concert1.setTicketsByPhone(29900);
+        concert1.setTicketsInPerson(20000);
+        concert1.numberOfTicketsSold = (concert1.ticketsByPhone + concert1.ticketsInPerson);
+        System.out.println("Total seats sold: " + (concert1.ticketsByPhone + concert1.ticketsInPerson));
+        System.out.println("The band playing is " + concert1.bandName);
+        System.out.println("Venue capacity = " + concert1.venueCapacity);
+       
+        System.out.println("Total sales = $" + ((concert1.priceAtVenue * concert1.ticketsInPerson) + (concert1.priceByPhone * concert1.ticketsByPhone)));
+        System.out.println("Seats left = " + (concert1.venueCapacity - concert1.numberOfTicketsSold));
+        
+        
+        
+        
+                
+        
+        
+        
+        
+        
+        
+    }
+    
+}
