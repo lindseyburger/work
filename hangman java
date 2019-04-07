@@ -1,0 +1,103 @@
+package hangman;
+
+import java.util.Scanner;
+
+/*some of the skeleton code i didnt understand bc i wasnt in class so i looked up videos on this to learn what to do
+
+*/
+
+public class Hangman {
+
+  //setting the instance variables
+  //string for the words and int for the #'s 
+  private String secretWord, disguisedWord;
+  private int numOfGuesses, numOfIncorrectGuesses;
+  
+
+  //creating setterz
+  //sets up the amount of ???? for the amount of letters in the word
+  public void setSecretWord(String secretWord) {
+    this.secretWord = secretWord;
+    
+    this.disguisedWord = "";
+    for ( int i = 0; i < secretWord.length(); i++ ) {
+      disguisedWord += "?";
+    }
+  }
+  
+  //
+  
+  
+  private String replaceCharAtIndex(String word, int index, char c){
+		char[] arr =  word.toCharArray();
+		arr[index] =  c;
+		word = new String(arr);
+		return word;
+  }
+  
+  //creating getters
+    public String getDisguisedWord() {
+    return disguisedWord;
+  }
+  
+  public String getSecretWord() {
+    return secretWord;
+  }
+  //if the secret word still has ? in it, then the loop continues, but if it doesnt, the system prints out that the person got it
+  public boolean isFound() {
+    if ( disguisedWord.contains("?") ) {
+      return false;
+    } else {
+      System.out.println("Congrats, that's the secret word/sentence: " + secretWord);
+      
+      return true;
+    }
+  }
+  //this is the code for replacing the ? with letters when they are guessed right and returns back the word w/ the ? and/or new letters
+  public void makeGuess(char c) {
+    boolean rightletter = false;
+    for (int i = 0; i < secretWord.length(); i++) {
+      if (secretWord.charAt(i) == c) {
+
+        StringBuilder newString = new StringBuilder(disguisedWord);
+        newString.setCharAt(i, c);
+        disguisedWord = newString.toString();
+        rightletter = true;
+      }
+    }
+    //the if statements add incorrect/correct number of guesses based on the letter
+    if (!rightletter) {
+      numOfIncorrectGuesses++;
+    }
+  }
+
+  
+// this starts the game...
+//while the word isn't found, the system keeps printing out the disguised word w/ guessed letters and ?'s, it also adds
+//another guess to the total guesses
+  public void setstartHangman( ) {
+    while (!isFound()) {
+      System.out.println("The secret word/sentence that I chose is: (" + disguisedWord + ")" );
+      numOfGuesses++;
+      System.out.println("Please guess a letter: " );
+      makeGuess(new Scanner(System.in).next().charAt(0));
+
+     //print out how many guesses in total, wrong guesses and right guesses
+      System.out.println("You've made: "  + numOfGuesses + " guess(es)." + " You've made " + numOfIncorrectGuesses + " wrong guess(es)" );
+          
+    }
+  }
+    
+
+    public static void main(String[] args) {
+    
+    //this is what starts the game, the secret word is set   
+    
+    Hangman hangman = new Hangman( );
+    hangman.setSecretWord("hi");
+    hangman.setstartHangman();
+
+  }
+
+   
+}
