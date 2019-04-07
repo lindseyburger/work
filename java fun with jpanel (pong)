@@ -1,0 +1,175 @@
+package game;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+public class Game extends JPanel {
+    
+    int x = 0 ;
+    int y = 0;
+    
+    int x2 = 40;
+    int y2 = 40;
+    
+    int border = 100;
+    
+    boolean ballGoingDown = true;
+    boolean ballGoingRight = true;
+    
+    boolean ball2GoingDown = true;
+    boolean ball2GoingRight =true;
+    
+    
+    private void moveBall2(){
+        
+        if(ball2GoingDown == true){
+        y2++;
+         }
+        
+        
+        if(ball2GoingDown == false){
+            y2--;
+            }
+        
+        
+        if(y2 == getHeight() - border){
+            ball2GoingDown = false;
+            System.out.println("Ball Y2 flipped.");
+        }
+        
+        
+        if (y2==0){
+            ball2GoingDown = true;
+            System.out.println("Ball Y2 flipped");
+        }
+     
+        
+         if(ball2GoingRight == true){
+            x2++; //pixel moves down 1 pixel
+        }
+        
+        if(ball2GoingRight == false){
+            x2--; //pixel moves up 1 pixel
+        }
+        
+        if (x2 == getWidth() - border){
+            
+            ball2GoingRight = false;
+            System.out.println("Ball X Flipped");
+        }
+        
+        if (x2 == 0){
+            
+            ball2GoingRight = true;
+            System.out.println("Ball X Flipped");
+        }
+        
+    }
+    private void moveBall(){
+        
+        
+        
+        if(ballGoingDown == true){
+            y++; //pixel moves down 1 pixel
+        }
+        
+        if(ballGoingDown == false){
+            y--; //pixel moves up 1 pixel
+        }
+        
+        if (y == getHeight() - border){
+            
+            ballGoingDown = false;
+            System.out.println("Ball Y Flipped");
+        }
+        
+        if (y == 0 ){
+            
+            ballGoingDown = true;
+            System.out.println("Ball Y Flipped");
+        }
+    
+        
+        
+        
+        
+        
+        if(ballGoingRight == true){
+            x++; //pixel moves down 1 pixel
+        }
+        
+        if(ballGoingRight == false){
+            x--; //pixel moves up 1 pixel
+        }
+        
+        if (x == getWidth() - border){
+            
+            ballGoingRight = false;
+            System.out.println("Ball X Flipped");
+        }
+        
+        if (x == 0){
+            
+            ballGoingRight = true;
+            System.out.println("Ball X Flipped");
+        }
+        
+        
+        
+    }
+    
+   // @Override
+    public void paint(Graphics g){
+        super.paint(g);
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(x, y, 100, 100);
+    }
+    
+    public void paint2(Graphics g2){
+        super.paint(g2);
+        g2.setColor(Color.DARK_GRAY);
+        g2.fillOval(x2, y2, 30, 30);
+    }
+    
+        
+    
+    
+    
+    
+    public static void main(String[] args) {
+     
+         //window code
+         JFrame myFrame = new JFrame("Pong");
+         myFrame.setSize(1024, 768);
+         myFrame.setVisible(true);
+         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         
+         //gamecode
+         Game ponggame = new Game();         
+         myFrame.add(ponggame);
+         while (true)
+                 {
+                     ponggame.moveBall();
+                     
+                     ponggame.repaint();
+                     
+             try {
+                 Thread.sleep(10);
+             } catch (InterruptedException ex) {
+                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+             }
+                 
+                 
+       
+     }
+}
+    }
+
+    
+    
+
