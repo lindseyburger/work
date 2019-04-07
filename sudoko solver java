@@ -1,0 +1,100 @@
+package soduko;
+
+import java.util.Arrays;
+
+
+public class Soduko {
+
+public static int[][] sudokoBoard = {
+            {0,0,3,0,2,0,6,0,0},
+            {9,0,0,3,0,5,0,0,1},
+            {0,0,1,8,0,6,4,0,0},
+            {0,0,8,1,0,2,9,0,0},
+            {7,0,0,0,0,0,0,0,8},
+            {0,0,6,7,0,8,2,0,0},
+            {0,0,2,6,0,9,5,0,0},
+            {8,0,0,2,0,3,0,0,9},
+            {0,0,5,0,1,0,3,0,0}
+      
+};   
+    
+    public static boolean solve(){
+        for(int row = 0; row < 9; row++){
+            for(int column = 0; column < 9; column++){
+                if(sudokoBoard[row][column] == 0){
+                    for(int num = 1; num <= 9; num++){
+                        if(isValid(row, column, num)){
+                        sudokoBoard[row][column] = num;
+                        if(solve()){
+                            return true;
+                        }
+                        else{
+                            sudokoBoard[row][column] = 0;
+                        }
+                    
+                        }
+                    }
+                    return false;
+                }
+            }
+        } 
+        print();
+        return true;
+    }
+    
+    public static boolean checkRow(int row, int num){
+        for(int i = 0; i < 9; i++){
+            if(sudokoBoard[row][i] == num){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean checkCol(int col, int num){
+        for(int i = 0; i<9; i++){
+            if(sudokoBoard[i][col] == num){
+                return true;
+            }
+        }
+        return false;
+    }
+        
+    public static boolean checkBox(int row, int col, int num){
+        int r = row - row%3;
+        int c = col - col%3;
+        for(int i = r; i < r+3; i++){
+            for(int j = c; j< c+3; j++){
+            if(sudokoBoard[i][j] == num){
+                return true;
+            }
+        }
+        }
+         return false;       
+    }
+    
+    public static boolean isValid(int row, int col, int num){
+       return !(checkRow(row, num) || checkCol(col, num) || checkBox(row, col, num));
+    }
+    
+    public static void print(){
+        for(int i = 0; i < 9; i++) {
+			System.out.print("\n");
+			for(int j = 0; j < 9; j++) {
+				if(sudokoBoard[i][j] == 0) {
+					System.out.print(" X "); //print this if the number isn't included.
+				}
+				else System.out.print(" " + sudokoBoard[i][j] + " ");
+			}
+		}
+		System.out.print("\n");
+	}
+    
+    
+    public static void main(String[] args) {
+       print();
+       solve();
+       
+    }
+    
+}
