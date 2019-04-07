@@ -1,0 +1,166 @@
+//
+//  main.c
+//  atm
+//
+//  Created by Lindsey Burger on 9/7/18.
+//  Name: Lindsey Burger
+//  Course: 2107_04
+//  Lab #2 ATM
+//  This lab created an ATM where a user (Nana) must enter her pin and then go through the menu and complete different transactions
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+
+int pinNum = 3014;
+int userPin;
+int attempts = 0;
+int origBal = 5000;
+int userSelection = 0;
+float amtWD = 0;
+int newBalance = 0;
+int numOfTran = 0;
+float amtDP = 0;
+int wrongAttempts = 0;
+int totalWD = 0;
+int checkAmt = 0;
+int receipt;
+int checkAmt2 = 0;
+int totalDP = 0;
+int dPAttempts = 0;
+
+void balance(){
+    if(numOfTran == 0){
+        printf("Your balance is %d \n", origBal);
+    }
+    else{
+        printf("Your balance is %d \n", newBalance);
+    }
+}
+
+void terminate(){
+    
+    printf("Thanks for visiting the ATM machine. Your amount of transactions today was %d. \n" , numOfTran);
+
+}
+
+void deposit(){
+    
+    printf("How much money would you like to deposit? You can only deposit $1000 per day, and this machines only accepts paper bills, no coins. \n");
+    scanf("%f", &amtDP);
+    checkAmt = ceil(amtDP);
+    totalDP = totalDP + amtDP;
+    
+    
+    if((checkAmt - amtDP > 0 || totalDP > 1000 || amtDP < 0 || totalDP < 0) && dPAttempts < 3 ){
+        dPAttempts ++;
+        printf("You have entered something incorrectly. \n");
+    
+                }
+    
+    if((checkAmt - amtDP == 0 && totalDP <= 1000) && amtDP > 0 && totalDP > 0){
+        newBalance = (origBal + totalDP - totalWD);
+        printf("Your balance is now: %d \n" , newBalance);
+        numOfTran++;
+        printf("Would you like a receipt? Press 1 for yes and 2 for no. \n");
+        scanf("%d" , &receipt);
+        if(receipt != 1 || receipt != 2){
+            printf("Not a valid response. No receipt printed. \n");
+        }
+
+
+        }
+    }
+
+
+
+void withdrawal(){
+    printf("How much money would you like to withdrawal? You can only withdrawal $1000 per day, and the amount can only be in multiples of $20. \n");
+    printf("Today so far you have withdrew $%d \n" , totalWD);
+    scanf("%f" , &amtWD);
+    int checkNum = ceil(amtWD); //i will use this to check to see if they entered a whole number
+    checkAmt = (amtWD + totalWD);
+    
+    
+    if ((amtWD <= 1000 && totalWD <= 1000) && (checkNum - amtWD == 0) && (amtWD / 20 == 0) && (checkAmt <= 1000) && amtWD > 0 && totalWD > 0){
+        
+        totalWD = totalWD + amtWD;
+        newBalance = (origBal - totalWD);
+        printf("Your balance is now: %d \n", newBalance);
+        numOfTran++;
+        printf("Would you like a receipt? Press 1 for yes and 2 for no. \n");
+        scanf("%d" , &receipt);
+        if(receipt != 1 || receipt != 2){
+            printf("Not a valid response. No receipt printed. \n");
+        }
+        
+    }
+    else{
+        
+        
+        if(((amtWD > 1000 || amtWD < 0) || (checkNum - amtWD) != 0 || (amtWD / 20 != 0) || checkAmt > 1000) && wrongAttempts > 3){
+            
+            printf("You have entered something incorrectly. \n");
+            
+        }
+            }
+  
+}
+
+
+
+
+int main(int argc, const char * argv[]) {
+   
+    printf("Hello, welcome to the ATM. Please enter your PIN number.\n"); //prompts user
+    scanf("%d",&userPin); //user enters pin
+        //need to create while loop, while the user has an attempt left, they can continue to try to access their account, if they run out of attempts, then the program terminates
+    
+    
+    while (userPin != pinNum && attempts < 2) {
+        attempts++;
+        
+        printf("Attempts: %d \n", attempts);
+        printf("That pin number is incorrect! Please try again. If your pin is entered incorrectly 3 times, the system will quit. \n");
+        scanf("%d", &userPin);
+        
+    }
+    
+    if (userPin == pinNum){
+           printf("Welcome, Nana. \n");
+            
+            while(userSelection != 4){//set parameters for 1 2 3,   4 will break the while loop
+        
+        printf("Enter 1 to view your balance. \n");
+        printf("Enter 2 to to make a cash withdrawal. \n");
+        printf("Enter 3 to deposit cash. \n");
+        printf("Enter 4 to quit. \n");
+            
+            scanf("%d", &userSelection);
+                
+                
+                
+                if(userSelection == 1){
+                    balance();
+                }
+                
+               
+                if(userSelection == 2){
+                    withdrawal();
+                                   }
+                
+                    
+                if(userSelection == 3 ){
+                    deposit();
+            }
+            }
+        
+                
+     if(userSelection == 4)
+            terminate();
+
+    return 0;
+    }
+    }
