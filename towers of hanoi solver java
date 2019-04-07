@@ -1,0 +1,69 @@
+package towersofhanoi;
+
+import java.util.Stack;
+
+/**
+ *
+ * @author LindseyKBurger
+ */
+public class TowersOfHanoi {
+
+    public static int size = 4;
+    public static Stack<Integer>[] stack = new Stack[4];
+    public static void tower(int i){
+        for(int j = i; j > 0; j--)
+            stack[1].push(j);
+            game();
+            move(i, 1, 2, 3);
+        
+     }
+    
+    public static void move(int n, int source, int destination, int spare){
+        if(n>0){
+            
+            move(n-1, source, spare, destination);
+            int i = stack[source].pop();
+            stack[spare].push(i);
+            game();
+            move(n-1, destination, source, spare);
+            
+        }
+    }
+    
+    public static void game(){
+        
+        for (int i = size - 1; i >= 0; i--){
+            String a = " ";
+            String b = " ";
+            String c = " ";
+            try{
+            a = String.valueOf(stack[1].get(i));
+            }
+            catch(Exception e){
+            }
+            
+            try{
+            b = String.valueOf(stack[2].get(i));
+            }
+            catch(Exception e){
+                
+            }
+            try{
+            c = String.valueOf(stack[3].get(i));
+            }
+            catch(Exception e){
+                
+            }
+            
+            System.out.println(" " +a+" " +b+ " " +c);
+        }
+        System.out.println();
+    }
+    public static void main(String[] args) {
+        stack[1] = new Stack<Integer>();
+        stack[2]= new Stack<Integer>();
+        stack[3] = new Stack<Integer>();
+        tower(size);
+    }
+    
+}
