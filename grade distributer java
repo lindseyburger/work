@@ -1,0 +1,121 @@
+package gradelab;
+
+/**
+ *
+ * @author LindseyKBurger
+ */
+import java.util.Scanner;
+public class GradeDistribution {
+    private int numA;
+    private int numB;
+    private int numC;
+    private int numD;
+    private int numF;
+    
+    
+    public void setNum(int numA, int numB, int numC, int numD, int numF)
+    {
+        this.numA = numA;
+        this.numB = numB;
+        this.numC = numC;
+        this.numD = numD;
+        this.numF = numF;
+    }
+
+    public int getNumA() {
+        return numA;
+    }
+
+    public int getNumB() {
+        return numB;
+    }
+
+    public int getNumC() {
+        return numC;
+    }
+
+    public int getNumD() {
+        return numD;
+    }
+
+    public int getNumF() {
+        return numF;
+    }
+    
+    
+    public int totalGrades(){
+        int totalGrades = (numA + numB + numC + numD + numF);
+        return totalGrades;
+        
+    }
+   
+    public double percentA (){
+       double percentA = (((numA)*100/totalGrades()));
+       return percentA;
+    }
+    public double percentB(){
+       return  (numB)*100/totalGrades();
+    }
+    
+    public double percentC() {
+        return ((numC)*100/totalGrades());
+    }
+     public double percentD() {
+        return ((numD)*100/totalGrades());
+    }
+      public double percentF() {
+        return ((numF)*100/totalGrades());
+    }
+            
+    
+  
+    
+    
+
+    public void drawGraph() {
+        System.out.println("**************************************************");
+        for(int i = 0; i < percentA()/2; i++){
+            System.out.print("*");
+        }
+        System.out.print("A");
+        System.out.println();
+        
+        for(int i = 0; i < percentB()/2; i++){
+            System.out.print("*");
+       }
+       System.out.print("B");
+       System.out.println();
+        
+       for(int i = 0; i < percentC()/2; i++){
+           System.out.print("*");
+       }
+       System.out.print("C");
+       System.out.println();
+       
+       for(int i = 0; i < percentD()/2; i++){
+           System.out.print("*");
+       }
+       System.out.print("D");
+       System.out.println();
+       
+       for(int i = 0; i < percentF()/2; i++){
+           System.out.print("*");
+        }
+       System.out.print("F");
+       System.out.println();
+    }
+    
+
+    
+
+
+  
+    public static void main(String[] args) {
+       GradeDistribution grades = new GradeDistribution();
+       Scanner s = new Scanner(System.in);
+       
+       grades.setNum(5, 4, 5, 5, 5);
+       grades.drawGraph();
+    }
+    
+}
