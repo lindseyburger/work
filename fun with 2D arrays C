@@ -1,0 +1,119 @@
+//
+//  main.c
+//  2dArray
+//
+//  Created by Lindsey Burger on 9/22/18.
+//  Integrating a 2d array in functions
+//
+
+#include <stdio.h>
+
+
+int max(int row, int col, int a[row][col]){
+    int maxrow = 0;
+    int maxcol = 0;
+    int max = a[0][0];
+    for(int i = 0; i < row; i ++){
+        for(int j = 0; j < col; j++){
+            if(a[i][j] > max){
+                max = a[i][j];
+                maxrow = i;
+                maxcol = j;
+            }
+        }
+        
+    }
+    printf ("The max value is : %d\n",max);
+    return max;
+}
+
+
+void RowSum(int row, int col, int a[row][col]){
+    for(int i = 0; i < row; i++){
+        int sum = 0;
+        for(int j = 0; j < col; j++){
+            sum = sum + a[i][j];
+        }
+        printf("Sum of row %d = %d\n", i+1, sum);
+    }
+    
+    
+}
+
+
+void ColumnSum(int row, int col, int a[row][col]){
+    for (int i = 0; i < col; i++)
+    {
+        int sum = 0;
+        for (int j = 0; j < row; j++)
+            sum = sum + a[j][i];
+        printf("Sum for column %d = %d\n", i+1, sum);}
+}
+
+
+void isSquare(int row, int col){
+    if(row % col == 0){
+        printf("This array is square.\n");
+    }
+    else{
+        printf("This array is not square.\n");
+    }
+    
+}
+
+void displayOutputs(int row, int col, int a[row][col]){
+    printf("\nThis is your array: ");
+    for(int i = 0; i < row; i++){
+        for(int j = 0; j < col; j++){
+            if(j % col == 0){
+                printf("\n");
+            }
+            printf("%d " , a[i][j]);
+            
+        }
+        
+        
+        
+    }
+    
+    
+}
+
+
+int main(int argc, const char * argv[]) {
+    int rows = 0;
+    int cols = 0;
+    printf("I am going to create a 2-dimensional array. Please enter the number of rows you would like in this array: \n");
+    scanf("%d", &rows);
+    printf("Please enter the amount of columns you would like: \n");
+    scanf("%d", &cols);
+    
+    printf("Now let's add some numbers to this array.\n");
+    
+    int array2d[rows][cols];
+    for(int i = 0 ; i < rows; ++i){
+        for(int j = 0; j < cols; ++j){
+            
+            printf("Row %d, Column %d: ", i+1, j+1);
+            scanf("%d", &array2d[i][j]);
+            
+        }
+    }
+    
+    printf("\n");
+    displayOutputs(rows, cols, array2d);
+    printf("\n");
+    printf("\n");
+    isSquare(rows, cols);
+    printf("\n");
+    RowSum(rows, cols, array2d);
+    printf("\n");
+    ColumnSum(rows, cols, array2d);
+    printf("\n");
+    max(rows, cols, array2d);
+    
+    
+    
+    
+    return 0;
+}
