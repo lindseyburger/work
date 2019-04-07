@@ -1,0 +1,372 @@
+//
+//  main.c
+//  Lab_06_Manual
+//
+//  Created by Lindsey Burger 
+//  Copyright © 2019 Lindsey Burger. All rights reserved.
+//
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+void upperLower(char s[100]){
+    for(int i = 0; i[s] != '\0'; i++){
+        if(i%2 ==0){
+            if ( i[s] >= 'a' && i[s] <= 'z'){
+            i[s] = i[s] - 32;
+            }
+            printf("%c", i[s]);
+        }
+        else{
+            i[s] = i[s];
+            printf("%c", i[s]);
+        }
+        
+    }
+    
+  printf("\n");
+}
+
+
+/*void compareStrToInt(char string1[], char string2[], char string3[], char string4[]){
+    int one = 0;
+    int one1 = 0;
+    int two = 0;
+    int three = 0;
+    int four = 0;
+    char*token;
+    
+    
+    token = strtok(string1,",");
+    printf("Array one: ");
+    for(int i = 0; i < 4; i++){
+        one = atoi(token);
+        printf("%d ", one);
+        
+    }
+        printf("\nThe sum of the first array is: %d\n", one);
+        
+        token = strtok(NULL, ",");
+    
+    
+    
+    token = strtok(string2, ",");
+    printf("Array two: ");
+    for(int i = 0; i < 4; i++){
+        two = two + atoi(token);
+        printf("%d ", two);
+        
+    }
+    printf("The sum of the second array is: %d\n", two);
+    
+    token = strtok(NULL, ",");
+    
+    
+    token = strtok(string3, ",");
+    printf("Array 3: ");
+    for(int i = 0; i < 2; i++){
+        three += atoi(token);
+        printf("%d ", three);
+        
+    }
+    printf("The sum of the third array is: %d\n", three);
+    
+    token = strtok(NULL, ",");
+    
+    
+    token = strtok(string4, ",");
+    printf("Array 4: ");
+    for(int i = 0; i < 2; i++){
+        four += atoi(token);
+        printf("%d ", four);
+        
+    }
+    printf("The sum of the fourth array is: %d\n", four);
+    
+    token = strtok(NULL, ",");
+    
+    token = strtok(NULL, ",");
+    
+    token = strtok(NULL, ",");
+    
+    token = strtok(string3, ",");
+    for(int i = 0; i < 2; i++){
+        three += atoi(token);
+        printf("Array three: %d ", three);
+        
+    }
+    printf("The sum of the third array is: %d\n", three);
+    
+    token = strtok(NULL, ",");
+
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+void compareStr(char stringA[], char stringB[]){
+    int lengthA = 0;
+    int lengthB = 0;
+     printf("\n");
+    
+   
+    
+    for(int i = 0; stringA[i] != '\0'; i++){
+        lengthA++;
+    }
+    for(int i = 0; stringB[i] != '\0'; i++){
+        lengthB++;
+     
+    }
+    
+    if(lengthA > lengthB){
+        printf("String 1 is bigger than string 2.\n");
+    }
+    if(lengthB > lengthA){
+        printf("String 2 is bigger than string 1.\n");
+    }
+    if(lengthB == lengthA){
+        printf("The strings are the same length.\n");
+    }
+    printf("\n");
+}
+
+void comparePartialStr(char a[], char b[], int userNumber){
+    int lengtha = 0;
+    int lengthb = 0;
+     printf("\n");
+    
+    for(int i = 0; i <= userNumber - 1 && i[a]!= '\0'; i++){
+        lengtha++;
+    }
+    for(int i = 0; i <= userNumber - 1 && i[b]!= '\0'; i++){
+        lengthb++;
+    }
+    if(lengtha > lengthb){
+        printf("String one is greater than string two.");
+    }
+    if(lengtha < lengthb){
+        printf("String one is less than string two.");
+        }
+    if(lengtha == lengthb){
+        printf("String one is the same length as string two.");
+    }
+     printf("\n");
+}
+
+void randomize(const char *const article[],  const char *const noun[],
+               const char *const verb[], const char *const prep[]){
+    printf("\n");
+    printf("This program will create a random sentence. Here is a random sentence: \n");
+
+    
+    for (int i = 0; i < 1; i++ )
+    {
+        printf( "%s %s %s %s %s %s\n",
+               article  [rand() % 5],
+               noun [rand() % 5],
+               verb [rand() % 5],
+               prep [rand() % 5],
+               article  [rand() % 5],
+               noun [rand() % 5]);
+    }
+    printf("\n");
+}
+
+void phonenumber(){
+    char *phoneNum = "(515) 555-5555";
+    char areaCode[3+1];
+    char number[7+1];
+    
+    sscanf(phoneNum, "(%3[0-9]) %3[0-9]-%4[0-9]", areaCode, number, &number[3]);
+    
+    printf("The area code of (555) 555-5555 is: %s\nThe number is: %s\n", areaCode, number);
+    printf("\n");
+}
+
+void reverseString(){
+    printf("\n");
+    int i = 0;
+    int length;
+    char inputstring[] = {"hellooo"};
+    printf("I am going to reverse the string: %s\n", inputstring);
+    
+    length = strlen(inputstring);
+    for(i = length - 1; i >= 0; i--){
+        printf("%c", inputstring[i]);
+    }
+    
+    printf("\n");
+}
+
+void findword(){
+    printf("\n");
+    const char* line = "i am coding\n";
+    const char *find = "coding\n";
+    printf("The line of text is : %s" ,line);
+    printf("The word to find is: %s", find);
+    char* p = strstr(line,find);
+    if ((p==line) || (p!=NULL && !isalnum((unsigned char)p[-1])))
+    {
+        p += strlen(find);
+        if (!isalnum((unsigned char)*p))
+        {
+            printf("The word was found.\n");
+        }
+    }
+    printf("\n");
+}
+
+void countChar(){
+    printf("This program will count how many time the letter 'e' is in the string 'Temple University is located in Philadelphia.'");
+    char a[] = {"Temple University is located in Philadelphia.\n"};
+    char e = 'e';
+    int counter = 0;
+    for(int i = 0; i < strlen(a); i++){
+        if( a[i] == e ){
+            counter ++;
+        }
+       
+    }
+     printf("\nThe letter 'e' occurs %d times.\n", counter);
+    printf("\n");
+}
+
+void countAlpha(){
+    printf("This function will count the number of letters in the sentence: Hello my name is Lindsey.");
+    int counter = 0;
+    char a[] = {"Hello my name is Lindsey"};
+    for(int i = 0; i <= strlen(a); i++){
+        if( isalpha(a[i])){
+            counter ++;
+        }
+
+}
+    printf("\nThere are %d letters.\n", counter);
+    printf("\n");
+}
+
+void countwords(){
+    printf("This function will count the number of words in the sentence: Hello my name is Lindsey.\n");
+    int counter = 0;
+    int spaces = 0;
+    char a[] = {"Hello my name is Lindsey."};
+    for(int i = 0; i <= strlen(a); i++){
+        if(a[i] == ' '){
+            spaces++;
+        }
+        
+        
+    
+}
+     counter = spaces + 1;
+    printf("There are %d words.\n", counter);
+}
+
+void startswithB(){
+    printf("\n");
+    char a[] = {"I like birds."};
+    char b = 'b';
+    int j = 0;
+    printf("This function will return the words that start with 'b' in the string 'I like birds.'\n");
+    for(int i = 0; i <= strlen(a); i++){
+        if((i == 0) && a[i] == b){
+            j=i;
+            
+            while(a[j]!= ' '){
+                char b2 = a[j];
+                printf("%c", a[j]);
+                j++;
+            }
+            printf(",");
+        }
+        if((a[i] == ' ') && (a[i+1] == b)){
+            j = i+1;
+            while((a[j]!= ' ' && j < strlen(a))){
+                printf("%c", a[j]);
+                j++;
+            }
+            printf(",");
+        }
+        i++;
+    }
+    printf("\n");
+}
+
+int main(int argc, const char * argv[]) {
+    
+    //upperLower
+    printf("I am going to convert the char array 'Lindsey' to upper case and lower case letters.\n");
+    char a[] = {"Lindsey."};
+    upperLower(a);
+    
+    
+    //compareStr
+    char string1[100];
+    char string2[100];
+    printf("Enter two strings and I will tell you which one is bigger, or if they are equal.\n");
+    printf("Enter string 1: ");
+    scanf("%s", string1);
+    printf("Enter string 2: ");
+    scanf("%s", string2);
+    compareStr(string1, string2);
+   
+    /*
+    //COME BACK TO THIS ONE
+    char one[] = {"1,2,3,4"};
+    char two[] = {"5,6,7,8"};
+    char three[] = {"11,12"};
+    char four[] = {"44,21"};
+   // compareStrToInt(one, two, three, four);
+    */
+    
+    //comparePartialStrings
+    char partialA[100];
+    char partialB[100];
+    int userNumber = 0;
+    printf("This function will compare two strings given the number of character to be compared and then tell you which string is greater, or if they are the same length.\n");
+    printf("Enter string 1: ");
+    scanf("%s", partialA);
+    printf("Enter string 2: ");
+    scanf("%s", partialB);
+    printf("How many characters do you want to compare? ");
+    scanf("%d", &userNumber);
+    comparePartialStr(partialA, partialB, userNumber);
+    
+    
+    
+    //randomSentences
+   
+    const char *article [5] = { "the", "a", "one", "some", "any",};
+    const char *noun[5] = { "boy", "girl", "dog", "town", "car",};
+    const char *verb[5] = { "drove","jumped", "ran", "walked", "skipped",};
+    const char *prep[5] = { "to", "from", "over", "under", "on",};
+    
+    randomize(article, noun, verb, prep );
+    
+    
+    phonenumber();
+    reverseString();
+    findword();
+    countChar();
+    countAlpha();
+    countwords();
+    startswithB();
+    
+    return 0;
+    
+    
+    
+}
